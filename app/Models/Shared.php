@@ -6,25 +6,17 @@ namespace App\Models;
 
 use App\Enums\CurrencyEnum;
 use App\Enums\CycleTypeEnum;
-use App\Enums\DataUnitEnum;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property string $id
- * @property string $hostname
- * @property int $provider_id
- * @property array $ip_addresses_v4
- * @property array $ip_addresses_v6
- * @property string $server_type
- * @property string $os
- * @property int $cpu
- * @property string $cpu_model
- * @property int $ram
- * @property DataUnitEnum $ram_type
- * @property int $disk
- * @property DataUnitEnum $disk_type
+ * @property string $name
+ * @property string $domain
+ * @property string $panel_type
+ * @property string $ipv4
+ * @property string|null $ipv6
  * @property string $location
  * @property \Illuminate\Support\Carbon $owned_at
  * @property \Illuminate\Support\Carbon $due_at
@@ -33,15 +25,26 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property CycleTypeEnum $cycle_type
  * @property float $price_per_month
  * @property float $price_per_year
+ * @property int $domains
+ * @property int $subdomains
+ * @property int $disk_in_gb
+ * @property int $emails
+ * @property int $bandwith_in_gb
+ * @property int $ftp
+ * @property int $databases
+ * @property bool $is_reseller
+ * @property int|null $accounts
+ * @property int $provider_id
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
+ * @property-read Provider $provider
  */
-final class Server extends Model
+final class Shared extends Model
 {
     use HasUuids;
 
     /**
-     * Get the provider that owns the server.
+     * Get the provider that owns this shared hosting.
      */
     public function provider(): BelongsTo
     {
@@ -56,17 +59,15 @@ final class Server extends Model
     protected function casts(): array
     {
         return [
-            'ip_addresses_v4' => 'array',
-            'ip_addresses_v6' => 'array',
-            'cycle_type' => CycleTypeEnum::class,
             'price' => 'float',
             'price_per_month' => 'float',
             'price_per_year' => 'float',
             'owned_at' => 'date',
             'due_at' => 'date',
             'price_currency' => CurrencyEnum::class,
-            'ram_type' => DataUnitEnum::class,
-            'disk_type' => DataUnitEnum::class,
+            'cycle_type' => CycleTypeEnum::class,
+            'is_reseller' => 'boolean',
+            'accounts' => 'integer',
         ];
     }
 }

@@ -34,6 +34,8 @@ enum CycleTypeEnum: string implements HasLabel
             self::THREE_MONTHLY => $price / 3,
             self::SIX_MONTHLY => $price / 6,
             self::YEARLY => $price / 12,
+            self::TWO_YEARLY => $price / 24,
+            self::THREE_YEARLY => $price / 36,
         }, 1);
     }
 
@@ -44,6 +46,8 @@ enum CycleTypeEnum: string implements HasLabel
             self::THREE_MONTHLY => $price * 12 / 3,
             self::SIX_MONTHLY => $price * 12 / 6,
             self::YEARLY => $price,
+            self::TWO_YEARLY => $price * 12 / 24,
+            self::THREE_YEARLY => $price * 12 / 36,
         }, 1);
     }
 }
