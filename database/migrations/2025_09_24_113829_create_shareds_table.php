@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('shareds', function (Blueprint $table) {
+        Schema::create('shareds', function (Blueprint $table): void {
             $table->uuid('id')->primary();
             $table->string('name')->unique();
             $table->string('domain');

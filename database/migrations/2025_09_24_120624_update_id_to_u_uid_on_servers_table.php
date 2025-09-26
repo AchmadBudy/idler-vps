@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('servers', function (Blueprint $table) {
+        Schema::table('servers', function (Blueprint $table): void {
             $table->uuid('id')->change();
         });
-        Schema::table('shareds', function (Blueprint $table) {
+        Schema::table('shareds', function (Blueprint $table): void {
             $table->foreignUuid('server_id')->constrained('servers');
         });
     }

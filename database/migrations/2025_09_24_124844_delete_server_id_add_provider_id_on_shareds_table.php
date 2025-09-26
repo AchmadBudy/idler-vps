@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('shareds', function (Blueprint $table) {
+        Schema::table('shareds', function (Blueprint $table): void {
             $table->dropConstrainedForeignId('server_id');
             $table->foreignId('provider_id')->constrained();
         });

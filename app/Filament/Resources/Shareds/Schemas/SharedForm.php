@@ -118,7 +118,7 @@ final class SharedForm
                             ->label('Accounts')
                             ->numeric()
                             ->columnSpan(2)
-                            ->visible(fn (Get $get) => $get('is_reseller')),
+                            ->visible(fn (Get $get): mixed => $get('is_reseller')),
                     ])
                     ->columns(4)
                     ->columnSpanFull(),
