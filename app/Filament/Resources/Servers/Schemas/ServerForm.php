@@ -22,6 +22,10 @@ final class ServerForm
             ->components([
                 Section::make('Server Details')
                     ->components([
+                        TextInput::make('name')
+                            ->label('Server Name')
+                            ->required()
+                            ->columnSpan(2),
                         TextInput::make('hostname')
                             ->label('Server Hostname')
                             ->required()

@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property string $id
+ * @property string $name
  * @property string $hostname
  * @property int $provider_id
  * @property array $ip_addresses_v4

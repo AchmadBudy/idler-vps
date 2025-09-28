@@ -17,8 +17,8 @@ final class ServersTable
     {
         return $table
             ->columns([
-                TextColumn::make('hostname')
-                    ->label('Server Hostname')
+                TextColumn::make('name')
+                    ->label('Server Name')
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('provider.name')

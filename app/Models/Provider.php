@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property int $id
+ * @property string $id
  * @property string $name
  * @property string $slug
  * @property string $description
@@ -17,5 +18,5 @@ use Illuminate\Database\Eloquent\Model;
  */
 final class Provider extends Model
 {
-    //
+    use HasUuids;
 }
