@@ -26,7 +26,7 @@ final class SharedResource extends Resource
 
     protected static ?int $navigationSort = 4;
 
-    public static function getNavigationBadge(): ?string
+    public static function getNavigationBadge(): string
     {
         return (string) self::getModel()::count();
     }

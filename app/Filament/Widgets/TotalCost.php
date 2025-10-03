@@ -13,7 +13,7 @@ use Filament\Widgets\StatsOverviewWidget\Stat;
 
 final class TotalCost extends StatsOverviewWidget
 {
-    public function getColumns(): int|array
+    public function getColumns(): int
     {
         return 2;
     }
@@ -54,15 +54,13 @@ final class TotalCost extends StatsOverviewWidget
             ->groupBy('price_currency')
             ->get();
 
-        $totalCost = $serverCost->toBase()
+        return $serverCost->toBase()
             ->merge($sharedCost->toBase())
             ->merge($domainCost->toBase())
             ->merge($miscCost->toBase())
             ->groupBy('price_currency')
-            ->map(fn ($group) => number_format($group->sum('total_cost'), 2))
-            ->map(fn ($cost, $currency) => $cost.' '.$currency)
+            ->map(fn ($group): string => number_format($group->sum('total_cost'), 2))
+            ->map(fn ($cost, $currency): string => $cost.' '.$currency)
             ->implode(', ');
-
-        return $totalCost;
     }
 }

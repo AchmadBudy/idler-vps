@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('domains', function (Blueprint $table) {
+        Schema::create('domains', function (Blueprint $table): void {
             $table->uuid(column: 'id')->primary();
             $table->foreignUuid('provider_id')->constrained();
             $table->string('domain_name');

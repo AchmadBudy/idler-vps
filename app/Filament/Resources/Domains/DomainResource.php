@@ -26,7 +26,7 @@ final class DomainResource extends Resource
 
     protected static ?int $navigationSort = 3;
 
-    public static function getNavigationBadge(): ?string
+    public static function getNavigationBadge(): string
     {
         return (string) self::getModel()::count();
     }

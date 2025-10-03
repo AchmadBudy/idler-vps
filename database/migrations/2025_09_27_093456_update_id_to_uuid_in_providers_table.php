@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('providers', function (Blueprint $table) {
+        Schema::table('providers', function (Blueprint $table): void {
             $table->uuid('id')->primary()->change();
         });
     }

@@ -27,7 +27,7 @@ final class ProviderResource extends Resource
 
     protected static ?int $navigationSort = 1;
 
-    public static function getNavigationBadge(): ?string
+    public static function getNavigationBadge(): string
     {
         return (string) self::getModel()::count();
     }

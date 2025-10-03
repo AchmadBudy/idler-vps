@@ -8,10 +8,7 @@ use Filament\Pages\Dashboard as BaseDashboard;
 
 final class Dashboard extends BaseDashboard
 {
-    /**
-     * @return int | array<string, ?int>
-     */
-    public function getColumns(): int|array
+    public function getColumns(): int
     {
         return 4;
     }
