@@ -25,6 +25,13 @@ final class ProviderResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
+    protected static ?int $navigationSort = 1;
+
+    public static function getNavigationBadge(): ?string
+    {
+        return (string) self::getModel()::count();
+    }
+
     public static function form(Schema $schema): Schema
     {
         return $schema

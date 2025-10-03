@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources\Shareds;
 
 use App\Filament\Resources\Shareds\Pages\CreateShared;
@@ -16,11 +18,18 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 
-class SharedResource extends Resource
+final class SharedResource extends Resource
 {
     protected static ?string $model = Shared::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+
+    protected static ?int $navigationSort = 4;
+
+    public static function getNavigationBadge(): ?string
+    {
+        return (string) self::getModel()::count();
+    }
 
     public static function form(Schema $schema): Schema
     {
