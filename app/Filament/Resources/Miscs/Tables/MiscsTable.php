@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\Miscs\Tables;
 
+use App\Models\Misc;
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
+use Filament\Notifications\Notification;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -43,6 +46,18 @@ final class MiscsTable
                 //
             ])
             ->recordActions([
+                Action::make('Extend Duration')
+                    ->icon('heroicon-o-clock')
+                    ->requiresConfirmation()
+                    ->action(function (Misc $record) {
+                        $record->due_at = $record->cycle_type->extendDuration($record->due_at);
+                        $record->save();
+
+                        Notification::make()
+                            ->title('Misc duration extended')
+                            ->success()
+                            ->send();
+                    }),
                 ViewAction::make(),
                 EditAction::make(),
             ])

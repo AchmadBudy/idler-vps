@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Enums;
 
 use Filament\Support\Contracts\HasLabel;
+use Illuminate\Support\Carbon;
 
 enum CycleTypeEnum: string implements HasLabel
 {
@@ -49,5 +50,17 @@ enum CycleTypeEnum: string implements HasLabel
             self::TWO_YEARLY => $price * 12 / 24,
             self::THREE_YEARLY => $price * 12 / 36,
         }, 1);
+    }
+
+    public function extendDuration($currentDueAt): Carbon
+    {
+        return match ($this) {
+            self::MONTHLY => Carbon::parse($currentDueAt)->modify('+1 month'),
+            self::THREE_MONTHLY => Carbon::parse($currentDueAt)->modify('+3 months'),
+            self::SIX_MONTHLY => Carbon::parse($currentDueAt)->modify('+6 months'),
+            self::YEARLY => Carbon::parse($currentDueAt)->modify('+1 year'),
+            self::TWO_YEARLY => Carbon::parse($currentDueAt)->modify('+2 years'),
+            self::THREE_YEARLY => Carbon::parse($currentDueAt)->modify('+3 years'),
+        };
     }
 }

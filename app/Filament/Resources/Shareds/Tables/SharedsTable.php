@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\Shareds\Tables;
 
+use App\Models\Shared;
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
+use Filament\Notifications\Notification;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -41,6 +44,18 @@ final class SharedsTable
                 //
             ])
             ->recordActions([
+                Action::make('Extend Duration')
+                    ->icon('heroicon-o-clock')
+                    ->requiresConfirmation()
+                    ->action(function (Shared $record) {
+                        $record->due_at = $record->cycle_type->extendDuration($record->due_at);
+                        $record->save();
+
+                        Notification::make()
+                            ->title('Shared duration extended')
+                            ->success()
+                            ->send();
+                    }),
                 ViewAction::make(),
                 EditAction::make(),
             ])
