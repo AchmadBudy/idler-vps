@@ -14,8 +14,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string $id
  * @property string $provider_id
  * @property string $domain_name
- * @property string $owned_at
- * @property string $due_at
+ * @property \Illuminate\Support\Carbon $owned_at
+ * @property \Illuminate\Support\Carbon $due_at
  * @property float $price
  * @property CurrencyEnum $price_currency
  * @property CycleTypeEnum $cycle_type
