@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Enums\CurrencyEnum;
+use App\Enums\CycleTypeEnum;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -15,8 +17,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string $owned_at
  * @property string $due_at
  * @property float $price
- * @property string $price_currency
- * @property string $cycle_type
+ * @property CurrencyEnum $price_currency
+ * @property CycleTypeEnum $cycle_type
  * @property float $price_per_month
  * @property float $price_per_year
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -32,6 +34,8 @@ final class Misc extends Model
         'price' => 'float',
         'price_per_month' => 'float',
         'price_per_year' => 'float',
+        'cycle_type' => CycleTypeEnum::class,
+        'price_currency' => CurrencyEnum::class,
     ];
 
     /**
