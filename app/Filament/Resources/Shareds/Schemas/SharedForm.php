@@ -6,8 +6,10 @@ namespace App\Filament\Resources\Shareds\Schemas;
 
 use App\Enums\CurrencyEnum;
 use App\Enums\CycleTypeEnum;
+use App\Models\Provider;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\ToggleButtons;
 use Filament\Schemas\Components\Section;
@@ -30,6 +32,24 @@ final class SharedForm
                             ->label('Provider')
                             ->relationship('provider', 'name')
                             ->required()
+                            ->createOptionForm([
+                                TextInput::make('name')
+                                    ->required()
+                                    ->unique(ignoreRecord: true),
+                                TextInput::make('link')
+                                    ->required()
+                                    ->unique(ignoreRecord: true),
+                                Textarea::make('description')
+                                    ->required()
+                                    ->columns(3)
+                                    ->rows(3)
+                                    ->columnSpanFull(),
+                            ])
+                            ->createOptionUsing(fn (array $data): string => Provider::create([
+                                ...$data,
+                                'slug' => str($data['name'])->slug(),
+                            ])->id
+                            )
                             ->columnSpan(2),
                         TextInput::make('domain')
                             ->label('Domain')

@@ -7,9 +7,11 @@ namespace App\Filament\Resources\Servers\Schemas;
 use App\Enums\CurrencyEnum;
 use App\Enums\CycleTypeEnum;
 use App\Enums\DataUnitEnum;
+use App\Models\Provider;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TagsInput;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
@@ -34,6 +36,24 @@ final class ServerForm
                             ->label('Provider')
                             ->relationship('provider', 'name')
                             ->required()
+                            ->createOptionForm([
+                                TextInput::make('name')
+                                    ->required()
+                                    ->unique(ignoreRecord: true),
+                                TextInput::make('link')
+                                    ->required()
+                                    ->unique(ignoreRecord: true),
+                                Textarea::make('description')
+                                    ->required()
+                                    ->columns(3)
+                                    ->rows(3)
+                                    ->columnSpanFull(),
+                            ])
+                            ->createOptionUsing(fn (array $data): string => Provider::create([
+                                ...$data,
+                                'slug' => str($data['name'])->slug(),
+                            ])->id
+                            )
                             ->columnSpan(2),
                         TagsInput::make('ip_addresses_v4')
                             ->label('IPv4 Addresses')
