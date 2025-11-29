@@ -11,6 +11,7 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Notifications\Notification;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -26,21 +27,22 @@ final class MiscsTable
                 TextColumn::make('provider.name')
                     ->label('Provider')
                     ->searchable(),
+                IconColumn::make('is_owned')
+                    ->label('Is Owned')
+                    ->boolean(),
+                TextColumn::make('price')
+                    ->label('Price')
+                    ->money(fn (Misc $record): string => $record->price_currency->value)
+                    ->sortable(),
+                TextColumn::make('cycle_type')
+                    ->label('Billing Cycle')
+                    ->searchable(),
                 TextColumn::make('owned_at')
                     ->label('Owned At')
                     ->date(),
                 TextColumn::make('due_at')
                     ->label('Due At')
                     ->date(),
-                TextColumn::make('price')
-                    ->label('Price')
-                    ->numeric(),
-                TextColumn::make('price_currency')
-                    ->label('Currency')
-                    ->searchable(),
-                TextColumn::make('cycle_type')
-                    ->label('Billing Cycle')
-                    ->searchable(),
             ])
             ->filters([
                 //

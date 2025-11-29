@@ -46,6 +46,11 @@ final class DomainResource extends Resource
         return DomainsTable::configure($table);
     }
 
+    public static function getEloquentQuery(): \Illuminate\Database\Eloquent\Builder
+    {
+        return parent::getEloquentQuery()->orderBy('id', 'desc');
+    }
+
     public static function getRelations(): array
     {
         return [

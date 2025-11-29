@@ -127,6 +127,12 @@ final class SharedForm
                             ->numeric()
                             ->required()
                             ->columnSpan(1),
+                        ToggleButtons::make('is_owned')
+                            ->label('Is Owned')
+                            ->default(false)
+                            ->boolean()
+                            ->grouped()
+                            ->columnSpan(1),
                         ToggleButtons::make('is_reseller')
                             ->label('Is Reseller')
                             ->boolean()

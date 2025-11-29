@@ -11,6 +11,7 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Notifications\Notification;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -28,10 +29,20 @@ final class SharedsTable
                     ->label('Provider')
                     ->searchable()
                     ->sortable(),
+                IconColumn::make('is_owned')
+                    ->label('Is Owned')
+                    ->boolean(),
                 TextColumn::make('panel_type')
                     ->label('Panel Type')
                     ->searchable()
                     ->sortable(),
+                TextColumn::make('price')
+                    ->label('Price')
+                    ->money(fn (Shared $record): string => $record->price_currency->value)
+                    ->sortable(),
+                TextColumn::make('cycle_type')
+                    ->label('Billing Cycle')
+                    ->searchable(),
                 TextColumn::make('owned_at')
                     ->label('Owned At')
                     ->date('j M  Y'),

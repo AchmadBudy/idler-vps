@@ -34,6 +34,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property CycleTypeEnum $cycle_type
  * @property float $price_per_month
  * @property float $price_per_year
+ * @property bool $is_owned
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
  */
@@ -68,6 +69,7 @@ final class Server extends Model
             'price_currency' => CurrencyEnum::class,
             'ram_type' => DataUnitEnum::class,
             'disk_type' => DataUnitEnum::class,
+            'is_owned' => 'boolean',
         ];
     }
 }

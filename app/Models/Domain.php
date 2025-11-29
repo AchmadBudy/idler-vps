@@ -21,6 +21,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property CycleTypeEnum $cycle_type
  * @property float $price_per_month
  * @property float $price_per_year
+ * @property bool $is_owned
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  */
@@ -36,6 +37,7 @@ final class Domain extends Model
         'price_per_year' => 'float',
         'cycle_type' => CycleTypeEnum::class,
         'price_currency' => CurrencyEnum::class,
+        'is_owned' => 'boolean',
     ];
 
     /**

@@ -35,6 +35,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property bool $is_reseller
  * @property int|null $accounts
  * @property int $provider_id
+ * @property bool $is_owned
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
  * @property-read Provider $provider
@@ -68,6 +69,7 @@ final class Shared extends Model
             'cycle_type' => CycleTypeEnum::class,
             'is_reseller' => 'boolean',
             'accounts' => 'integer',
+            'is_owned' => 'boolean',
         ];
     }
 }

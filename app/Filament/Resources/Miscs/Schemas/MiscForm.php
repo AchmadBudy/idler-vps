@@ -11,6 +11,7 @@ use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\ToggleButtons;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
@@ -72,6 +73,12 @@ final class MiscForm
                             ->options(CycleTypeEnum::class)
                             ->required()
                             ->columnSpan(1),
+                        ToggleButtons::make('is_owned')
+                            ->label('Is Owned')
+                            ->default(false)
+                            ->boolean()
+                            ->grouped()
+                            ->columnSpan(2),
                     ])
                     ->columns(4)
                     ->columnSpanFull(),
