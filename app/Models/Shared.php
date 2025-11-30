@@ -6,6 +6,8 @@ namespace App\Models;
 
 use App\Enums\CurrencyEnum;
 use App\Enums\CycleTypeEnum;
+use Illuminate\Database\Eloquent\Attributes\Scope;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -50,6 +52,15 @@ final class Shared extends Model
     public function provider(): BelongsTo
     {
         return $this->belongsTo(Provider::class);
+    }
+
+    /**
+     * Scope query for still owned
+     */
+    #[Scope]
+    protected function stillOwned(Builder $query): void
+    {
+        $query->where('is_owned', true);
     }
 
     /**
